@@ -15,7 +15,6 @@ BeginPlay() 함수는 게임 플레이가 시작되고 나서, 오브젝트가 �
 특히 멀티플레이어 게임과 같이 동적인 요소가 많은 환경에서는 더욱 신중하게 고려해야 합니다. 
 생성자와 BeginPlay() 각각에서 어떤 종류의 작업을 수행해야 하는지를 명확히 구분하는 것이 중요합니다.
 */
-
 #include "GameFramework/Actor.h"
 #include "CoreMinimal.h"
 
@@ -63,3 +62,24 @@ private:
         UE_LOG(LogTemp, Warning, TEXT("MyGameObject is now active!"));
     }
 };
+
+
+
+/*
+충돌 타입에 대하여,
+Q: Pawn Type 의 캐릭터와의 충돌은 무시하면서, pawn type의 enemey 와의 충돌은 발생하게 하는 setting 은 어떻게 해야 하는가?
+A: Collison channel 을 새로 만들어서 적용한다. 
+    방법 - 새로운 collision 타입 추가
+만약 게임에 특정한 적의 타입을 추가하고 싶다면, Unreal Engine에서는 새로운 오브젝트 타입을 프로젝트 설정을 통해 추가할 수 있습니다.
+
+프로젝트 설정 열기:
+에디터 상단의 메뉴에서 Edit > Project Settings를 선택합니다.
+Collision 설정 접근:
+왼쪽 메뉴에서 Engine 섹션 하위의 Collision을 선택합니다.
+Object Channels 추가:
+Collision 섹션에서 Object Channels를 찾습니다.
+New Object Channel... 버튼을 클릭합니다.
+팝업 창에서 새 오브젝트 타입의 이름(예: Enemy)과 기본 반응(예: Block, Ignore)을 설정합니다.
+저장 및 적용:
+설정을 저장하고 블루프린트로 돌아가 새로 생성한 오브젝트 타입을 해당 적 캐릭터의 콜리전 컴포넌트에 설정합니다.
+    */
